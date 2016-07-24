@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0"
+         DefaultTargets="Build"
+         xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+  <!-- Properties optionally set via command line parameter -->
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <PackageVersion Condition=" '$(PackageVersion)' == '' ">1.0.0</PackageVersion>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <SolutionDir>$(MSBuildThisFileDirectory)</SolutionDir>
+    <AssemblyVersionNumber>$(PackageVersion).0</AssemblyVersionNumber>
+    <ProjectFilePath>$(SolutionDir)EqualityBuilder\EqualityBuilder.csproj</ProjectFilePath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SolutionToBuild Include="$(SolutionDir)EqualityBuilder.sln" />
+  </ItemGroup>
+
+  <Target Name="Build">
+    <MSBuild ToolsVersion="$(MSBuildToolsVersion)"
+             Projects="@(SolutionToBuild)"
+             Targets="Clean;Build"
+             Properties="Configuration=$(Configuration);AssemblyVersionNumber=$(AssemblyVersionNumber)" />
+  </Target>
+
+  <Target Name="CreatePackage" DependsOnTargets="Build">
+    <Exec Command="NuGet.exe pack &quot;$(ProjectFilePath)&quot; -Symbols -Verbosity detailed -Properties Configuration=$(Configuration) -IncludeReferencedProjects -MSBuildVersion 14.0" />
+ </Target>
+</Project>

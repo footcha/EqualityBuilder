@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://github.com/footcha/EqualityBuilder/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/footcha/EqualityBuilder</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+      1.0.0.0 Initial version. Equality generator based on public properties.
+    </releaseNotes>
+    <copyright>Petr Kozelek 2016</copyright>
+    <tags>object equal hashcode</tags>
+  </metadata>
+  </package>
