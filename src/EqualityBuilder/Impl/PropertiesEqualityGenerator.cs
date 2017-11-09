@@ -28,9 +28,9 @@ namespace EqualityBuilder.Impl
 
         }
 
-        public IEqualityValue CreateValue(object obj)
+        public IEqualityValue CreateValue(object @object)
         {
-            return new EqualityValue(obj, GenerateHashCode(obj), AreEqual);
+            return new EqualityValue(@object, GenerateHashCode(@object), AreEqual);
         }
 
         //protected bool Equals(TestValue other)
@@ -150,6 +150,31 @@ namespace EqualityBuilder.Impl
                 assign,
                 hash);
             return Expression.Lambda<Func<object, int>>(final, p1).Compile();
+        }
+    }
+
+    public class PropertiesEqualityGenerator<T> : IEqualityGenerator<T>
+    {
+        private readonly PropertiesEqualityGenerator generator;
+
+        public PropertiesEqualityGenerator(PropertiesEqualityGenerator generator)
+        {
+            this.generator = generator;
+        }
+
+        public int GenerateHashCode(T @object)
+        {
+            return generator.GenerateHashCode(@object);
+        }
+
+        public bool AreEqual(T obj1, object obj2)
+        {
+            return generator.AreEqual(obj1, obj2);
+        }
+
+        public IEqualityValue CreateValue(T @object)
+        {
+            return generator.CreateValue(@object);
         }
     }
 }

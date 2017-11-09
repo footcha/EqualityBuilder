@@ -8,7 +8,7 @@ namespace EqualityBuilder.Tests
     {
         private class ValueObject
         {
-            private static readonly IEqualityGenerator EqualityGenerator = EqualityPattern.FromPublicProperties(MethodBase.GetCurrentMethod().DeclaringType);
+            private static readonly IEqualityGenerator<ValueObject> EqualityGenerator = EqualityPattern.FromPublicProperties<ValueObject>();
 
             private readonly IEqualityValue equalityValue;
 
