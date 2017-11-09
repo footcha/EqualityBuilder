@@ -12,8 +12,9 @@
     <description>$description$</description>
     <releaseNotes>
       1.0.0.0 Initial version. Equality generator based on public properties.
+      1.1.0.0 Initial version. Equality generator based on public properties - null values in properties are supported.
     </releaseNotes>
-    <copyright>Petr Kozelek 2016</copyright>
+    <copyright>Petr Kozelek 2017</copyright>
     <tags>object equal hashcode</tags>
   </metadata>
   </package>
