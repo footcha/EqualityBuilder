@@ -12,7 +12,7 @@ namespace EqualityBuilder.Tests
 
             private readonly IEqualityValue equalityValue;
 
-            public ValueObject(bool property1, int property2, decimal property3, float property4)
+            public ValueObject(bool property1, string property2, decimal property3, float property4)
             {
                 Property1 = property1;
                 Property2 = property2;
@@ -23,7 +23,7 @@ namespace EqualityBuilder.Tests
 
             public bool Property1 { get; }
 
-            public int Property2 { get; }
+            public string Property2 { get; }
 
             public decimal Property3 { get; }
 
@@ -44,7 +44,7 @@ namespace EqualityBuilder.Tests
                 unchecked
                 {
                     var hashCode = Property1.GetHashCode();
-                    hashCode = (hashCode * 397) ^ Property2.GetHashCode();
+                    hashCode = (hashCode * 397) ^ (Property2?.GetHashCode() ?? 0);
                     hashCode = (hashCode * 397) ^ Property3.GetHashCode();
                     hashCode = (hashCode * 397) ^ Property4.GetHashCode();
                     return hashCode;
@@ -55,7 +55,7 @@ namespace EqualityBuilder.Tests
             {
                 var other = (ValueObject)obj;
                 return Property1.Equals(other.Property1)
-                    && Property2.Equals(other.Property2)
+                    && (Property2 != null && Property2.Equals(other.Property2) || Property2 == null && other.Property2 == null)
                     && Property3.Equals(other.Property3)
                     && Property4.Equals(other.Property4);
             }
@@ -65,33 +65,48 @@ namespace EqualityBuilder.Tests
         public void Equality()
         {
             // arrange
-            var x1 = new ValueObject(true, 10, 1, 2f);
-            var x2 = new ValueObject(true, 10, 1, 2f);
-            var y1 = new ValueObject(true, 10, 11, 12f);
+            var x1 = new ValueObject(true, "a", 10, 2f);
+            var x2 = new ValueObject(true, "a", 10, 2f);
+            var y1 = new ValueObject(true, "b", 10, 12f);
 
             // act & assert
             Assert.Equal(x1.GetHashCodeManuallyImplemented(), x1.GetHashCode());
             Assert.Equal(x2.GetHashCodeManuallyImplemented(), x2.GetHashCode());
             Assert.Equal(y1.GetHashCodeManuallyImplemented(), y1.GetHashCode());
 
-            Assert.Equal(x1, x2);
-            Assert.NotEqual(x1, y1);
+            Assert.True(x1.Equals(x2));
+            Assert.False(x1.Equals(y1));
+            Assert.False(x1.Equals(new object()));
+            Assert.False(x1.Equals(null));
         }
 
-        [Fact(Skip = "Waiting for implementation")]
+        [Fact]
         public void EqualityWithNullProperties()
         {
-            // TODO
+            // arrange
+            var x1 = new ValueObject(true, "a", 10, 12f);
+            var x2 = new ValueObject(true, "a", 10, 12f);
+            var y1 = new ValueObject(true, null, 10, 12f);
+            var y2 = new ValueObject(true, null, 10, 12f);
+
+            // act & assert
+            Assert.Equal(x1, x2);
+            Assert.Equal(x2, x1);
+            Assert.NotEqual(x1, y1);
+            Assert.NotEqual(y1, x1);
+            Assert.Equal(y1, y2);
+            Assert.Equal(y2, y1);
+            Assert.NotEqual(y1, x1);
         }
 
         [Fact]
         public void Performance()
         {
-            var x1 = new ValueObject(true, 10, 1, 2f);
-            var x2 = new ValueObject(true, 10, 1, 2f);
-            var y1 = new ValueObject(true, 10, 11, 12f);
+            var x1 = new ValueObject(true, "a", 10, 2f);
+            var x2 = new ValueObject(true, "a", 10, 2f);
+            var y1 = new ValueObject(true, "b", 10, 12f);
 
-            for (int i = 0; i < 10000000; i++)
+            for (int i = 0; i < 1000000; i++)
             {
                 var a = x1.Equals(x2);
                 var b = x1.Equals(y1);
