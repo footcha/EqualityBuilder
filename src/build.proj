@@ -27,6 +27,6 @@
   </Target>
 
   <Target Name="CreatePackage" DependsOnTargets="Build">
-    <Exec Command="NuGet.exe pack &quot;$(ProjectFilePath)&quot; -Symbols -Verbosity detailed -Properties Configuration=$(Configuration) -IncludeReferencedProjects -MSBuildVersion 14.0" />
+    <Exec Command="NuGet.exe pack &quot;$(ProjectFilePath)&quot; -Symbols -Verbosity detailed -Properties Configuration=$(Configuration) -IncludeReferencedProjects" />
  </Target>
 </Project>
