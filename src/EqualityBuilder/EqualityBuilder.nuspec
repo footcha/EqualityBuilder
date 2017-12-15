@@ -10,11 +10,9 @@
     <projectUrl>https://github.com/footcha/EqualityBuilder</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>
-      1.0.0.0 Initial version. Equality generator based on public properties.
-      1.1.0.0 Initial version. Equality generator based on public properties - null values in properties are supported.
-    </releaseNotes>
+    <releaseNotes>EqualityComparer derived from IEqualityGenerator.</releaseNotes>
     <copyright>Petr Kozelek 2017</copyright>
-    <tags>object equal hashcode</tags>
+    <tags>object equal hashcode gethashcode generator</tags>
+    <summary>$description$</summary>
   </metadata>
   </package>

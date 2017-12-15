@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("EqualityBuilder")]
-[assembly: AssemblyDescription("Generator for method Equal and GetHashCode")]
+[assembly: AssemblyDescription("Super fast runtime generator for method Equal and GetHashCode. It provides methods for simple property-based comparer.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Petr Kozelek <petr.kozelek@gmail.com>")]
+[assembly: AssemblyCompany("Petr Kozelek")]
 [assembly: AssemblyProduct("EqualityBuilder")]
-[assembly: AssemblyCopyright("Petr Kozelek © 2016")]
+[assembly: AssemblyCopyright("Petr Kozelek © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
