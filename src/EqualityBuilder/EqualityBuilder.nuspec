@@ -10,8 +10,8 @@
     <projectUrl>https://github.com/footcha/EqualityBuilder</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>EqualityComparer derived from IEqualityGenerator.</releaseNotes>
-    <copyright>Petr Kozelek 2017</copyright>
+    <releaseNotes>Fix Property type declared as interface is supported.</releaseNotes>
+    <copyright>Petr Kozelek 2018</copyright>
     <tags>object equal hashcode gethashcode generator</tags>
     <summary>$description$</summary>
   </metadata>

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Petr Kozelek")]
 [assembly: AssemblyProduct("EqualityBuilder")]
-[assembly: AssemblyCopyright("Petr Kozelek © 2017")]
+[assembly: AssemblyCopyright("Petr Kozelek © 2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
