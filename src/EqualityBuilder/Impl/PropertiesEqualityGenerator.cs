@@ -52,13 +52,14 @@ namespace EqualityBuilder.Impl
             var var2 = Expression.Variable(declaringType, "obj2Casted");
             var assign2 = Expression.Assign(var2, p2Casted);
 
+            var equalsMethodInfo = typeof(object).GetMethod("Equals", new[] {typeof(object)});
             foreach (var propertyInfo in properties)
             {
                 var propertyExp1 = Expression.Property(var1, propertyInfo.Name);
                 var propertyExp2 = Expression.Property(var2, propertyInfo.Name);
                 var propertyExp2casted = Expression.Convert(propertyExp2, typeof(object));
 
-                var equalsPropertyExp = Expression.Call(propertyExp1, propertyInfo.PropertyType.GetMethod("Equals", new[] { typeof(object) }), propertyExp2casted);
+                var equalsPropertyExp = Expression.Call(propertyExp1, equalsMethodInfo, propertyExp2casted);
                 if (propertyInfo.PropertyType.IsValueType)
                 {
                     equalsExprs.Add(equalsPropertyExp);
@@ -115,12 +116,12 @@ namespace EqualityBuilder.Impl
             var p1Casted = Expression.Convert(p1, prop1.DeclaringType);
             var var1 = Expression.Variable(prop1.DeclaringType, "obj1Casted");
             var assign = Expression.Assign(var1, p1Casted);
+            var getHashCodeMethodInfo = typeof(object).GetMethod("GetHashCode");
             foreach (var propertyInfo in properties)
             {
-                //var propertyExp1 = Expression.Property(p1Casted, propertyInfo.Name);
                 var propertyExp1 = Expression.Property(var1, propertyInfo.Name);
 
-                var getHashCodePropertyExp = Expression.Call(propertyExp1, propertyInfo.PropertyType.GetMethod("GetHashCode"));
+                var getHashCodePropertyExp = Expression.Call(propertyExp1, getHashCodeMethodInfo);
                 if (propertyInfo.PropertyType.IsValueType)
                 {
                     callExpressions.Add(getHashCodePropertyExp);
